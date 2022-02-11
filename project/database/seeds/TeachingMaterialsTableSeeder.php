@@ -43,6 +43,42 @@ class TeachingMaterialsTableSeeder extends Seeder
                 'week' => 2,
                 'detail' => 'N予備校：03.お問い合わせフォームを作ってみよう'
             ],
+            [
+                'week' => 3,
+                'detail' => '■ N予備校 Webデザインコース
+                【JavaScriptの基礎を学ぶ】
+                01.はじめてのJavaScript
+                <a href="https://www.nnn.ed.nico/courses/488">N予備校</a>'
+            ],
+            [
+                'week' => 4,
+                'detail' => '■ドットインストール
+                【詳解JavaScript オブジェクト編】
+                https://dotinstall.com/lessons/basic_javascript_objects_v2'
+            ],
+            [
+                'week' => 4,
+                'detail' => '【詳解JavaScript DOM編】
+                https://dotinstall.com/lessons/basic_javascript_dom_v2'
+            ],
+            [
+                'week' => 5,
+                'detail' => '■ N予備校 プログラミング入門コース
+                【第1章 はじめよう】
+                06.はじめてのJavaScript'
+            ],
+            [
+                'week' => 5,
+                'detail' => '07.JavaScriptでの計算'
+            ],
+            [
+                'week' => 5,
+                'detail' => '08.JavaScriptで論理を扱う'
+            ],
+            [
+                'week' => 5,
+                'detail' => '09.JavaScriptのループ'
+            ],
         ];
         DB::table('teaching_materials')->insert($params);
     }

@@ -20,42 +20,45 @@
     <title>Document</title>
 </head>
 
-<body>
-    <div class="d-flex">
-        <div>
-            <p>week</p>
-            <div id="teaching_material_title">
+<body class="w-100 border">
+    <div class="reflection_sheet border">
+        <div class="border" style="width:300px; flex-shrink: 0;">
+            <p class="mb-0 border">week</p>
+            <div class="border" id="teaching_material_title">
                 オンライン教材
             </div>
-            <div>
+            <div class="border">
                 7つの振り返り(人格)
             </div>
-            <div class="personality_reflection_step_title">1.よくできた点は何か？</div>
-            <div class="personality_reflection_step_title">2.なぜうまくいったのか？</div>
-            <div class="personality_reflection_step_title">3.続けた方が方が良いことは何か？</div>
-            <div class="personality_reflection_step_title">4.うまくいかなかった点は何か？</div>
-            <div class="personality_reflection_step_title">5.なぜうまくいかなかったのか？</div>
-            <div class="personality_reflection_step_title">6.今後やめた方がよいこと何か？</div>
-            <div class="personality_reflection_step_title">7.今後改善すべき点は何か？</div>
+            <div class="personality_reflection_step_title border">1.よくできた点は何か？</div>
+            <div class="personality_reflection_step_title border">2.なぜうまくいったのか？</div>
+            <div class="personality_reflection_step_title border">3.続けた方が方が良いことは何か？</div>
+            <div class="personality_reflection_step_title border">4.うまくいかなかった点は何か？</div>
+            <div class="personality_reflection_step_title border">5.なぜうまくいかなかったのか？</div>
+            <div class="personality_reflection_step_title border">6.今後やめた方がよいこと何か？</div>
+            <div class="personality_reflection_step_title border">7.今後改善すべき点は何か？</div>
         </div>
         @foreach ($weeks as $week)
-            <div style="width:600px">
-                <p>{{ $week->week_number }}週目</p>
-                <div class="teaching_material">
+            <div class="border" style="width:600px; flex-shrink: 0;">
+                <p class="mb-0 border">{{ $week->week_number }}週目</p>
+                <div class="teaching_material border">
                     @foreach ($week->teaching_materials as $teaching_material)
-                        <div>
-                            <input type="checkbox" name="" data-teaching_material_id="{{ $teaching_material->id }}"
-                                class="checkbox" id="" @if ($teaching_material->is_done($user->id, $teaching_material->id)) checked @endif>
-                            <span>{{ $teaching_material->detail }}</span>
+                        <div class="d-flex border">
+                            <label class="border mb-0">
+                                <input type="checkbox" name=""
+                                    data-teaching_material_id="{{ $teaching_material->id }}" class="checkbox d-block"
+                                    id="" @if ($teaching_material->is_done($user->id, $teaching_material->id)) checked @endif>
+                            </label>
+                            <span class="border d-block w-100">{{ $teaching_material->detail }}</span>
                         </div>
                     @endforeach
                 </div>
-                <div>7つの振り返り(人格)</div>
+                <div class="border">7つの振り返り(人格)</div>
                 @for ($i = 1; $i <= 7; $i++)
-                    <div class="personality_reflection_step">
-                        <span>{{ $i }}</span>
-                        <textarea type="text" class="d-inline-block personality_reflection" style="width:95%"
-                            data-week="{{ $week->week_number }}"
+                    <div class="personality_reflection_step d-flex border">
+                        <div class="border">{{ $i }}</div>
+                        <textarea type="text" class="d-block personality_reflection border" rows="3"
+                            style="width:98%; resize:none;" data-week="{{ $week->week_number }}"
                             data-reflection_step={{ $i }}>{{ $week->personality_reflection($user->id, $week->week_number, $i) }}</textarea>
                     </div>
                 @endfor

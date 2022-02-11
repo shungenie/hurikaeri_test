@@ -71,6 +71,7 @@ $(function () {
 
   function resizeSheetTitle() {
     var teaching_material_height = $('.teaching_material').height();
+    $('.teaching_material').height(teaching_material_height);
     $('#teaching_material_title').height(teaching_material_height);
     var personality_reflection_step_height = $('.personality_reflection_step').height();
     $('.personality_reflection_step_title').height(personality_reflection_step_height);
