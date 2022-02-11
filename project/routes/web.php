@@ -18,3 +18,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/reflection', 'GeneralMemberController@index')->middleware('auth')->name('general_index');
+
+Route::post('/reflection/check', 'GeneralMemberController@reflection_check')->middleware('auth')->name('reflection_check');
