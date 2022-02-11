@@ -22,6 +22,18 @@ class WeeksTablesSeeder extends Seeder
                 'week_number' => 2,
                 'phase_number' => 1
             ],
+            [
+                'week_number' => 3,
+                'phase_number' => 1
+            ],
+            [
+                'week_number' => 4,
+                'phase_number' => 2
+            ],
+            [
+                'week_number' => 5,
+                'phase_number' => 2
+            ],
         ];
         DB::table('weeks')->insert($params);
     }
