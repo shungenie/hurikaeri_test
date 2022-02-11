@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\TeachingMaterial;
 use App\Models\ProgressOfTeachingMaterial;
+use App\Models\PersonalityReflection;
 use App\Models\Week;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -32,6 +33,21 @@ class GeneralMemberController extends Controller
         $progress_of_teaching_material->user_id = $user_id;
         $progress_of_teaching_material->teaching_material_id = $teaching_material_id;
         $progress_of_teaching_material->is_done = $is_done;
+        $progress_of_teaching_material->save();
+        return redirect('/reflection');
+    }
+
+    public function personality_reflection_post(Request $request)
+    {
+        $user_id = Auth::user()->id;
+        $week = $request->week;
+        $reflection_step = $request->reflection_step;
+        $detail = $request->detail;
+        $progress_of_teaching_material = PersonalityReflection::firstOrNew(['user_id' => $user_id, 'week' => $week, 'reflection_step' => $reflection_step]);
+        $progress_of_teaching_material->user_id = $user_id;
+        $progress_of_teaching_material->week = $week;
+        $progress_of_teaching_material->reflection_step = $reflection_step;
+        $progress_of_teaching_material->detail = $detail;
         $progress_of_teaching_material->save();
         return redirect('/reflection');
     }
