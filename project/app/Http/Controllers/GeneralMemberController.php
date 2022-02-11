@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\TeachingMaterial;
-use App\Models\ProgressOfTeachingMaterial;
-use App\Models\PersonalityReflection;
+use App\Models\Assignment;
+use App\Models\ProgressOfAssignment;
+use App\Models\Reflection;
 use App\Models\Week;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -20,35 +20,37 @@ class GeneralMemberController extends Controller
     {
         $user = Auth::user();
         $weeks = Week::all();
-        $teaching_materials = TeachingMaterial::all();
+        $teaching_materials = Assignment::where('assignment_type_id', 1)->get();
         return view('generalUser.index', compact('user', 'weeks', 'teaching_materials'));
     }
 
-    public function reflection_check(Request $request)
+    public function assignment_check(Request $request)
     {
         $user_id = Auth::user()->id;
-        $teaching_material_id = $request->teaching_material_id;
+        $assignment_id = $request->assignment_id;
         $is_done = ($request->is_done == 'true') ? 1 : 0;
-        $progress_of_teaching_material = ProgressOfTeachingMaterial::firstOrNew(['user_id' => $user_id, 'teaching_material_id' => $teaching_material_id]);
-        $progress_of_teaching_material->user_id = $user_id;
-        $progress_of_teaching_material->teaching_material_id = $teaching_material_id;
-        $progress_of_teaching_material->is_done = $is_done;
-        $progress_of_teaching_material->save();
+        $progress_of_assignment = ProgressOfAssignment::firstOrNew(['user_id' => $user_id, 'assignment_id' => $assignment_id]);
+        $progress_of_assignment->user_id = $user_id;
+        $progress_of_assignment->assignment_id = $assignment_id;
+        $progress_of_assignment->is_done = $is_done;
+        $progress_of_assignment->save();
         return redirect('/reflection');
     }
 
-    public function personality_reflection_post(Request $request)
+    public function reflection_post(Request $request)
     {
         $user_id = Auth::user()->id;
         $week = $request->week;
         $reflection_step = $request->reflection_step;
+        $reflection_type_id = $request->reflection_type;
         $detail = $request->detail;
-        $progress_of_teaching_material = PersonalityReflection::firstOrNew(['user_id' => $user_id, 'week' => $week, 'reflection_step' => $reflection_step]);
-        $progress_of_teaching_material->user_id = $user_id;
-        $progress_of_teaching_material->week = $week;
-        $progress_of_teaching_material->reflection_step = $reflection_step;
-        $progress_of_teaching_material->detail = $detail;
-        $progress_of_teaching_material->save();
+        $reflection = Reflection::firstOrNew(['user_id' => $user_id, 'week' => $week, 'reflection_type_id' => $reflection_type_id, 'reflection_step' => $reflection_step]);
+        $reflection->user_id = $user_id;
+        $reflection->week = $week;
+        $reflection->reflection_step = $reflection_step;
+        $reflection->reflection_type_id = $reflection_type_id;
+        $reflection->detail = $detail;
+        $reflection->save();
         return redirect('/reflection');
     }
 

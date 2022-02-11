@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateProgressOfTeachingMaterialsTable extends Migration
+class CreateReflectionTypesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,9 @@ class CreateProgressOfTeachingMaterialsTable extends Migration
      */
     public function up()
     {
-        Schema::create('progress_of_teaching_materials', function (Blueprint $table) {
+        Schema::create('reflection_types', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('user_id');
-            $table->integer('teaching_material_id');
-            $table->boolean('is_done');
+            $table->string('name');
             $table->timestamps();
         });
     }
@@ -29,6 +27,6 @@ class CreateProgressOfTeachingMaterialsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('progress_of_teaching_materials');
+        Schema::dropIfExists('reflection_types');
     }
 }

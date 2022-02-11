@@ -4,11 +4,11 @@ var __webpack_exports__ = {};
   !*** ./resources/js/reflectionSheet.js ***!
   \*****************************************/
 $(function () {
-  // -----------------------オンライン教材の送信------------------------
+  // -----------------------チェックボックスの送信------------------------
   var checkbox = $('.checkbox');
   checkbox.on('click', function () {
     var $this = $(this);
-    var teaching_material_id = $this.data('teaching_material_id');
+    var assignment_id = $this.data('assignment_id');
     $.ajax({
       headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -18,7 +18,7 @@ $(function () {
       type: 'POST',
       //受け取り方法の記述（GETもある）
       data: {
-        teaching_material_id: teaching_material_id,
+        assignment_id: assignment_id,
         is_done: $this.prop('checked')
       }
     }) // Ajaxリクエストが成功した場合
@@ -38,23 +38,25 @@ $(function () {
     return false;
   }); // -----------------------人格の振り返りの送信------------------------
 
-  var personality_reflection = $('.personality_reflection');
-  personality_reflection.on('change', function () {
+  var reflection = $('.reflection');
+  reflection.on('change', function () {
     var $this = $(this);
     var week = $this.data('week');
     var reflection_step = $this.data('reflection_step');
+    var reflection_type = $this.data('reflection_type');
     var detail = $this.val();
     $.ajax({
       headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
       },
-      url: '/reflection/personality_reflection',
+      url: '/reflection/reflection_post',
       //routeの記述
       type: 'POST',
       //受け取り方法の記述（GETもある）
       data: {
         week: week,
         reflection_step: reflection_step,
+        reflection_type: reflection_type,
         detail: detail
       }
     }) // Ajaxリクエストが成功した場合
@@ -70,11 +72,26 @@ $(function () {
   }); // --------------------------DOMのサイズ調整---------------------------------------
 
   function resizeSheetTitle() {
-    var teaching_material_height = $('.teaching_material').height();
+    var teaching_material_height = 0;
+    $('.teaching_material').each(function () {
+      if ($(this).height() > teaching_material_height) {
+        teaching_material_height = $(this).height();
+      }
+    });
     $('.teaching_material').height(teaching_material_height);
     $('#teaching_material_title').height(teaching_material_height);
+    var posse_assignment_height = 0;
+    $('.posse_assignment').each(function () {
+      if ($(this).height() > posse_assignment_height) {
+        posse_assignment_height = $(this).height();
+      }
+    });
+    $('.posse_assignment').height(posse_assignment_height);
+    $('#posse_assignment_title').height(posse_assignment_height);
     var personality_reflection_step_height = $('.personality_reflection_step').height();
     $('.personality_reflection_step_title').height(personality_reflection_step_height);
+    var learning_reflection_step_height = $('.learning_reflection_step').height();
+    $('.learning_reflection_step_title').height(learning_reflection_step_height);
   }
 
   $(window).resize(resizeSheetTitle());
