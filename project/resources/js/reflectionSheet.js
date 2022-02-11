@@ -1,10 +1,10 @@
 $(function () {
-    // -----------------------オンライン教材の送信------------------------
+    // -----------------------チェックボックスの送信------------------------
     var checkbox = $('.checkbox');
 
     checkbox.on('click', function () {
         var $this = $(this);
-        let teaching_material_id = $this.data('teaching_material_id');
+        let assignment_id = $this.data('assignment_id');
         $.ajax({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
@@ -12,7 +12,7 @@ $(function () {
             url: '/reflection/check', //routeの記述
             type: 'POST', //受け取り方法の記述（GETもある）
             data: {
-                teaching_material_id: teaching_material_id,
+                assignment_id: assignment_id,
                 is_done: $this.prop('checked'),
             },
         })
@@ -37,22 +37,24 @@ $(function () {
     });
 
     // -----------------------人格の振り返りの送信------------------------
-    var personality_reflection = $('.personality_reflection');
+    var reflection = $('.reflection');
 
-    personality_reflection.on('change', function () {
+    reflection.on('change', function () {
         var $this = $(this);
         let week = $this.data('week');
         let reflection_step = $this.data('reflection_step');
+        let reflection_type = $this.data('reflection_type');
         let detail = $this.val();
         $.ajax({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
             },
-            url: '/reflection/personality_reflection', //routeの記述
+            url: '/reflection/reflection_post', //routeの記述
             type: 'POST', //受け取り方法の記述（GETもある）
             data: {
                 week: week,
                 reflection_step: reflection_step,
+                reflection_type: reflection_type,
                 detail: detail,
             },
         })
@@ -73,12 +75,29 @@ $(function () {
     // --------------------------DOMのサイズ調整---------------------------------------
 
     function resizeSheetTitle() {
-        let teaching_material_height = $('.teaching_material').height();
+        let teaching_material_height = 0;
+        $('.teaching_material').each(function () {
+            if ($(this).height() > teaching_material_height) {
+                teaching_material_height = $(this).height();
+            }
+        });
         $('.teaching_material').height(teaching_material_height);
         $('#teaching_material_title').height(teaching_material_height);
 
+        let posse_assignment_height = 0;
+        $('.posse_assignment').each(function () {
+            if ($(this).height() > posse_assignment_height) {
+                posse_assignment_height = $(this).height();
+            }
+        });
+        $('.posse_assignment').height(posse_assignment_height);
+        $('#posse_assignment_title').height(posse_assignment_height);
+
         let personality_reflection_step_height = $('.personality_reflection_step').height();
         $('.personality_reflection_step_title').height(personality_reflection_step_height);
+
+        let learning_reflection_step_height = $('.learning_reflection_step').height();
+        $('.learning_reflection_step_title').height(learning_reflection_step_height);
     }
 
     $(window).resize(resizeSheetTitle());

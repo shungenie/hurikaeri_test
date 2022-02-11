@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class PersonalityReflection extends Model
+class ReflectionType extends Model
 {
-    protected $guarded = [];
+    //
 }

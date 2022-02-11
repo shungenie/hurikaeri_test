@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePersonalityReflectionsTable extends Migration
+class CreateAssignmentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,10 @@ class CreatePersonalityReflectionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('personality_reflections', function (Blueprint $table) {
+        Schema::create('assignments', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('week');
-            $table->integer('user_id');
-            $table->integer('reflection_step');
+            $table->integer('assignment_type_id');
             $table->string('detail');
             $table->timestamps();
         });
@@ -30,6 +29,6 @@ class CreatePersonalityReflectionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('personality_reflections');
+        Schema::dropIfExists('assignments');
     }
 }
