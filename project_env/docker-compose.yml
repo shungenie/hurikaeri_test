@@ -1,0 +1,52 @@
+version: "3"
+
+volumes:
+  db-volume:
+  maildir: {}
+
+services:
+  db:
+    build:
+      context: ./db
+    ports:
+      - 3306:3306
+    volumes:
+      - ./db/var/lib/mysql:/var/lib/mysql
+    environment:
+      - MYSQL_DATABASE=laravel
+      - MYSQL_USER=laravel
+      - MYSQL_PASSWORD=password
+      - MYSQL_ROOT_PASSWORD=password
+  app:
+    build:
+      context: ./app
+    volumes:
+      - ../project:/work/backend
+    depends_on: ["db"]
+  web:
+    build:
+      context: ./web
+    ports:
+      - 80:80
+    volumes:
+      - ../project:/work/backend
+    depends_on: ["app"]
+  mail:
+    image: mailhog/mailhog
+    container_name: mailhog
+    ports:
+      - '8025:8025'
+    environment:
+      MH_STORAGE: maildir
+      MH_MAILDIR_PATH: /tmp
+    volumes:
+      - maildir:/tmp
+  cron:
+    build:
+      context: ./
+      dockerfile: ./cron/Dockerfile
+    tty: true
+    volumes:
+      - ../project:/work/backend
+    depends_on:
+      - app
