@@ -25,4 +25,4 @@ Route::post('/reflection/check', 'GeneralMemberController@assignment_check')->mi
 Route::post('/reflection/reflection_post', 'GeneralMemberController@reflection_post')->middleware('auth')->name('reflection_post');
 Route::post('/reflection/study_time', 'GeneralMemberController@study_time')->middleware('auth')->name('study_time');
 
-Route::get('/admin/reflection', 'AdminController@index')->middleware('auth')->middleware('is_admin_role')->name('general_index');
+Route::get('/admin/reflection', 'AdminController@index')->middleware('auth')->middleware('is_admin_role')->name('admin_index');

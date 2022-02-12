@@ -22,23 +22,37 @@
     <title>Document</title>
 </head>
 
-<body class="p-5">
-    @foreach ($users as $user)
-        <div class="card w-100 mb-3">
-            <div class="card-body">
-                <h5 class="card-title">{{ $user->name }}</h5>
-                <p class="card-text">
-                    @if ($user->role_id === 2)
-                        サーバントリーダー
-                    @else
-                        POSSE メンバー
-                    @endif
-                </p>
-                <a href="#" class="btn btn-primary">振り返りシート</a>
-                <a href="#" class="btn btn-primary">学習時間などの詳細</a>
+<body>
+    @component('components.header', ['user' => $user])
+
+    @endcomponent
+    <div class="p-5">
+        @foreach ($posse_members as $posse_member)
+            <div class="card w-100 mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">{{ $posse_member->name }}</h5>
+                    <p class="mb-0 card-text">
+                        <span>メンバーID:</span>
+                        <span>
+                            {{ $user->id }}
+                        </span>
+                    </p>
+                    <p class="card-text">
+                        <span>役職:</span>
+                        <span>
+                            @if ($posse_member->role_id === 2)
+                                サーバントリーダー
+                            @else
+                                POSSE メンバー
+                            @endif
+                        </span>
+                    </p>
+                    <a href="#" class="btn btn-primary">振り返りシート</a>
+                    <a href="#" class="btn btn-primary">学習時間などの詳細</a>
+                </div>
             </div>
-        </div>
-    @endforeach
+        @endforeach
+    </div>
 </body>
 
 </html>
