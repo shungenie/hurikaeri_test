@@ -30,6 +30,7 @@
         <div class="reflection_sheet border">
             <div class="border" style="width:300px; flex-shrink: 0;">
                 <p class="mb-0 border">week</p>
+                <div class="border">日付</div>
                 <div id="study_time_title">
                     <div class="border">
                         合計時間
@@ -73,6 +74,8 @@
             @foreach ($weeks as $week)
                 <div class="border" style="width:600px; flex-shrink: 0;">
                     <p class="mb-0 border">{{ $week->week_number }}週目</p>
+                    <div class="border">{{ $week->start_date_of_week($week->id, $user->generation_id) }}~
+                    </div>
                     <div class="study_time">
                         <div class="border">
                             <span
