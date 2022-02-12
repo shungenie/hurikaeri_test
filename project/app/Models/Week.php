@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Reflection;
+use App\Models\StudyTime;
 
 class Week extends Model
 {
@@ -35,5 +36,39 @@ class Week extends Model
             return $learning_reflection->detail;
         }
         return '';
+    }
+
+    public function total_study_time($user_id, $week_number)
+    {
+        $review_time = StudyTime::where('user_id', $user_id)->where('week', $week_number)->where('study_time_type_id', 1)->first();
+        $assignment_time = StudyTime::where('user_id', $user_id)->where('week', $week_number)->where('study_time_type_id', 2)->first();
+        if ($review_time && $assignment_time) {
+            return $review_time->study_time + $assignment_time->study_time;
+        }
+        if ($review_time) {
+            return $review_time->study_time;
+        }
+        if ($assignment_time) {
+            return $assignment_time->study_time;
+        }
+        return 0;
+    }
+
+    public function review_time($user_id, $week_number)
+    {
+        $review_time = StudyTime::where('user_id', $user_id)->where('week', $week_number)->where('study_time_type_id', 1)->first();
+        if ($review_time) {
+            return $review_time->study_time;
+        }
+        return 0;
+    }
+
+    public function assignment_time($user_id, $week_number)
+    {
+        $assignment_time = StudyTime::where('user_id', $user_id)->where('week', $week_number)->where('study_time_type_id', 2)->first();
+        if ($assignment_time) {
+            return $assignment_time->study_time;
+        }
+        return 0;
     }
 }
