@@ -69,6 +69,41 @@ $(function () {
       console.log(xhr);
     });
     return false;
+  }); // -----------------------学習時間の送信------------------------
+
+  var study_time = $('.study_time_input');
+  study_time.on('change', function () {
+    var $this = $(this);
+    var week = $this.data('week');
+    var study_time_type = $this.data('study_time_type');
+    var study_time = $this.val();
+    $.ajax({
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      },
+      url: '/reflection/study_time',
+      //routeの記述
+      type: 'POST',
+      //受け取り方法の記述（GETもある）
+      data: {
+        week: week,
+        study_time_type: study_time_type,
+        study_time: study_time
+      }
+    }) // Ajaxリクエストが成功した場合
+    .done(function () {
+      var total_study_time = $('#total_study_time_week' + week);
+      var assignment_time = parseInt($('#assignment_time_week' + week).val());
+      var review_time = parseInt($('#review_time_week' + week).val());
+      total_study_time.text(assignment_time + review_time);
+    }) // Ajaxリクエストが失敗した場合
+    .fail(function (data, xhr, err) {
+      //ここの処理はエラーが出た時にエラー内容をわかるようにしておく。
+      //とりあえず下記のように記述しておけばエラー内容が詳しくわかります。笑
+      console.log(err);
+      console.log(xhr);
+    });
+    return false;
   }); // --------------------------DOMのサイズ調整---------------------------------------
 
   function resizeSheetTitle() {
@@ -92,6 +127,10 @@ $(function () {
     $('.personality_reflection_step_title').height(personality_reflection_step_height);
     var learning_reflection_step_height = $('.learning_reflection_step').height();
     $('.learning_reflection_step_title').height(learning_reflection_step_height);
+    var review_time_height = $('.review_time').height();
+    $('.review_time_title').height(review_time_height);
+    var assignment_time_height = $('.assignment_time').height();
+    $('.assignment_time_title').height(assignment_time_height);
   }
 
   $(window).resize(resizeSheetTitle());

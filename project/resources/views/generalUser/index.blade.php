@@ -24,6 +24,19 @@
     <div class="reflection_sheet border">
         <div class="border" style="width:300px; flex-shrink: 0;">
             <p class="mb-0 border">week</p>
+            <div id="study_time_title">
+                <div class="border">
+                    合計時間
+                </div>
+                <div class="d-flex w-100">
+                    <div class="border w-100 review_time_title">
+                        復習時間
+                    </div>
+                    <div class="border w-100 assignment_time_title">
+                        今週の課題
+                    </div>
+                </div>
+            </div>
             <div class="border" id="teaching_material_title">
                 オンライン教材
             </div>
@@ -54,6 +67,24 @@
         @foreach ($weeks as $week)
             <div class="border" style="width:600px; flex-shrink: 0;">
                 <p class="mb-0 border">{{ $week->week_number }}週目</p>
+                <div class="study_time">
+                    <div class="border">
+                        <span
+                            id="total_study_time_week{{ $week->week_number }}">{{ $week->total_study_time($user->id, $week->week_number) }}</span>時間
+                    </div>
+                    <div class="d-flex w-100">
+                        <div class="border w-100 review_time">
+                            <input type="number" value="{{ $week->review_time($user->id, $week->week_number) }}"
+                                data-study_time_type=1 data-week="{{ $week->week_number }}" class="study_time_input"
+                                id="review_time_week{{ $week->week_number }}">時間
+                        </div>
+                        <div class="border w-100 assignment_time">
+                            <input type="number" value="{{ $week->assignment_time($user->id, $week->week_number) }}"
+                                data-study_time_type=2 data-week="{{ $week->week_number }}" class="study_time_input"
+                                id="assignment_time_week{{ $week->week_number }}">時間
+                        </div>
+                    </div>
+                </div>
                 <div class="teaching_material border">
                     @foreach ($week->teaching_materials as $teaching_material)
                         <div class="d-flex border">

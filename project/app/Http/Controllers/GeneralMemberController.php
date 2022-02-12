@@ -6,6 +6,7 @@ use App\Models\Assignment;
 use App\Models\ProgressOfAssignment;
 use App\Models\Reflection;
 use App\Models\Week;
+use App\Models\StudyTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -51,6 +52,20 @@ class GeneralMemberController extends Controller
         $reflection->reflection_type_id = $reflection_type_id;
         $reflection->detail = $detail;
         $reflection->save();
+        return redirect('/reflection');
+    }
+
+    public function study_time(Request $request)
+    {
+        $user_id = Auth::user()->id;
+        $week = $request->week;
+        $study_time_type_id = $request->study_time_type;
+        $study_time = StudyTime::firstOrNew(['user_id' => $user_id, 'week' => $week, 'study_time_type_id' => $study_time_type_id]);
+        $study_time->user_id = $user_id;
+        $study_time->week = $week;
+        $study_time->study_time_type_id = $study_time_type_id;
+        $study_time->study_time = $request->study_time;
+        $study_time->save();
         return redirect('/reflection');
     }
 
