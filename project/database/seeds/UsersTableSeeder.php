@@ -22,7 +22,7 @@ class UsersTableSeeder extends Seeder
                 'slack_id' => 'U01C72Q45MJ',
                 'role_id' => 2,
                 'posse_branch' => 1,
-                'generation' => 1,
+                'generation_id' => 1,
                 'phase_number' => 1,
             ],
             [
@@ -32,7 +32,7 @@ class UsersTableSeeder extends Seeder
                 'slack_id' => 'U01H96KU21K',
                 'role_id' => 1,
                 'posse_branch' => 1,
-                'generation' => 1.5,
+                'generation_id' => 1,
                 'phase_number' => 1,
             ],
             [
@@ -42,7 +42,7 @@ class UsersTableSeeder extends Seeder
                 'slack_id' => 'U015H9Q2WTZ',
                 'role_id' => 2,
                 'posse_branch' => 2,
-                'generation' => 2,
+                'generation_id' => 2,
                 'phase_number' => 2,
             ],
             [
@@ -52,7 +52,7 @@ class UsersTableSeeder extends Seeder
                 'slack_id' => 'U015H9Q2WTZ',
                 'role_id' => 1,
                 'posse_branch' => 2,
-                'generation' => 2.5,
+                'generation_id' => 3,
                 'phase_number' => 2,
             ],
         ]);

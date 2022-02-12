@@ -43,7 +43,7 @@
                         <span>
                             {{ $posse_member->posse_branch }}
                         </span>
-                        <span> {{ number_format($posse_member->generation, 1) }}</span>
+                        <span> {{ $posse_member->generation($posse_member->generation_id) }}</span>
                         <span>期生</span>
                     </p>
                     <p class="mb-0 card-text">

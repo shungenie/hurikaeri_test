@@ -23,7 +23,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->integer('role_id');
             $table->integer('posse_branch');
-            $table->double('generation', 4, 1);
+            $table->integer('generation_id');
             $table->integer('phase_number');
             $table->rememberToken();
             $table->timestamps();
