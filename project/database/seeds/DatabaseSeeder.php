@@ -17,5 +17,7 @@ class DatabaseSeeder extends Seeder
         $this->call(ReflectionTypesTableSeeder::class);
         $this->call(AssignmentTypesTableSeeder::class);
         $this->call(StudyTimeTypesTableSeeder::class);
+        $this->call(GenerationsTableSeeder::class);
+        $this->call(StartDateOfWeeksTableSeeder::class);
     }
 }

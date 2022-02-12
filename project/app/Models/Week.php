@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Reflection;
 use App\Models\StudyTime;
+use App\Models\StartDateOfWeek;
 
 class Week extends Model
 {
@@ -70,5 +71,14 @@ class Week extends Model
             return $assignment_time->study_time;
         }
         return 0;
+    }
+
+    public function start_date_of_week($week_id, $generation_id)
+    {
+        $start_date_of_week_table = StartDateOfWeek::where('week_id', $week_id)->where('generation_id', $generation_id)->first();
+        if ($start_date_of_week_table) {
+            return $start_date_of_week_table->start_date;
+        }
+        return 'まだ設定されていません';
     }
 }

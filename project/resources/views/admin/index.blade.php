@@ -34,7 +34,22 @@
                     <p class="mb-0 card-text">
                         <span>メンバーID:</span>
                         <span>
-                            {{ $user->id }}
+                            {{ $posse_member->id }}
+                        </span>
+                    </p>
+                    <p class="mb-0 card-text">
+                        <span>基本情報:</span>
+                        <span>POSSE</span>
+                        <span>
+                            {{ $posse_member->posse_branch }}
+                        </span>
+                        <span> {{ $posse_member->generation($posse_member->generation_id) }}</span>
+                        <span>期生</span>
+                    </p>
+                    <p class="mb-0 card-text">
+                        <span>フェーズ:</span>
+                        <span>
+                            {{ $posse_member->phase_number }}
                         </span>
                     </p>
                     <p class="card-text">
