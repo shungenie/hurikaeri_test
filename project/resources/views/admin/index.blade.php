@@ -46,6 +46,12 @@
                         <span> {{ number_format($posse_member->generation, 1) }}</span>
                         <span>期生</span>
                     </p>
+                    <p class="mb-0 card-text">
+                        <span>フェーズ:</span>
+                        <span>
+                            {{ $posse_member->phase_number }}
+                        </span>
+                    </p>
                     <p class="card-text">
                         <span>役職:</span>
                         <span>

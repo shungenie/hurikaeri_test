@@ -20,7 +20,7 @@ class GeneralMemberController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $weeks = Week::all();
+        $weeks = Week::where('phase_number', $user->phase_number)->get();
         $teaching_materials = Assignment::where('assignment_type_id', 1)->get();
         return view('generalUser.index', compact('user', 'weeks', 'teaching_materials'));
     }
