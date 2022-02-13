@@ -26,3 +26,8 @@ Route::post('/reflection/reflection_post', 'GeneralMemberController@reflection_p
 Route::post('/reflection/study_time', 'GeneralMemberController@study_time')->middleware('auth')->name('study_time');
 
 Route::get('/admin/reflection', 'AdminController@index')->middleware('auth')->middleware('is_admin_role')->name('admin_index');
+
+Route::get('/admin/reflection/curriculum', 'AdminController@curriculum')->middleware('auth')->middleware('is_admin_role')->name('curriculum');
+
+Route::get('/admin/reflection/week_create', 'AdminController@week_create')->middleware('auth')->middleware('is_admin_role')->name('week_create');
+Route::post('/admin/reflection/week_create', 'AdminController@week_store')->middleware('auth')->middleware('is_admin_role')->name('week_store');

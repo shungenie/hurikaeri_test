@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\WeekRequest;
 use App\Models\User;
+use App\Models\Week;
 use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
@@ -20,25 +22,29 @@ class AdminController extends Controller
         return view('admin.index', compact('user', 'posse_members'));
     }
 
+    public function curriculum()
+    {
+        $user = Auth::user();
+        $weeks = Week::all();
+        return view('admin.curriculum', compact('user', 'weeks'));
+    }
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function week_create()
     {
-        //
+        return view('admin.weekCreate');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function week_store(WeekRequest $request)
     {
-        //
+        $week = new Week;
+        $week->week_number = $request->week_number;
+        $week->phase_number = $request->phase_number;
+        $week->save();
+        return redirect(route('curriculum'));
     }
 
     /**
