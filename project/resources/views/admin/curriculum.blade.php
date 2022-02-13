@@ -44,7 +44,7 @@
                                     class="btn btn-primary">スタート日時編集画面へ</a>
                             </div>
                             <div>
-                                <a href="{{ route('week_edit', ['id' => $week->id]) }}"
+                                <a href="{{ route('teaching_material_create', ['id' => $week->id]) }}"
                                     class="btn btn-primary">オンライン教材編集画面へ</a>
                                 <a href="{{ route('week_start_edit', ['id' => $week->id]) }}"
                                     class="btn btn-primary">POSSE課題編集画面へ</a>

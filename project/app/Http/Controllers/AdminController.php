@@ -5,11 +5,15 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\WeekRequest;
 use App\Http\Requests\StartDateOfWeekRequest;
+use App\Http\Requests\AssignmentRequest;
 use App\Models\User;
 use App\Models\Week;
 use App\Models\Generation;
 use App\Models\StartDateOfWeek;
+use App\Models\Assignment;
 use Illuminate\Support\Facades\Auth;
+
+use App\Consts\ReflectionConsts;
 
 class AdminController extends Controller
 {
@@ -49,6 +53,22 @@ class AdminController extends Controller
         $week->phase_number = $request->phase_number;
         $week->save();
         return redirect(route('curriculum'));
+    }
+
+    public function teaching_material_create($id)
+    {
+        $week = Week::find($id);
+        return view('admin.teachingMaterialCreate', compact('week'));
+    }
+
+    public function teaching_material_store(AssignmentRequest $request)
+    {
+        $assignment = new Assignment;
+        $assignment->week = $request->week;
+        $assignment->detail = $request->detail;
+        $assignment->assignment_type_id = ReflectionConsts::TEACHING_MATERIAL;
+        $assignment->save();
+        return redirect(route('teaching_material_create', ['id' => $request->week_id]));
     }
 
     /**
@@ -93,6 +113,8 @@ class AdminController extends Controller
         $start_date_of_week->save();
         return redirect(route('week_start_edit', ['id' => $request->id]));
     }
+
+
 
     /**
      * Remove the specified resource from storage.
