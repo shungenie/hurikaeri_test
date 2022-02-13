@@ -71,6 +71,22 @@ class AdminController extends Controller
         return redirect(route('teaching_material_create', ['id' => $request->week_id]));
     }
 
+    public function posse_assignments_create($id)
+    {
+        $week = Week::find($id);
+        return view('admin.posseAssignmentCreate', compact('week'));
+    }
+
+    public function posse_assignments_store(AssignmentRequest $request)
+    {
+        $assignment = new Assignment;
+        $assignment->week = $request->week;
+        $assignment->detail = $request->detail;
+        $assignment->assignment_type_id = ReflectionConsts::POSSE_ASSIGNMENT;
+        $assignment->save();
+        return redirect(route('posse_assignments_create', ['id' => $request->week_id]));
+    }
+
     /**
      * Display the specified resource.
      *
@@ -132,5 +148,25 @@ class AdminController extends Controller
     {
         Assignment::find($id)->delete();
         return redirect(route('teaching_material_create', ['id' => $request->week_id]));
+    }
+
+    public function posse_assignments_edit($id)
+    {
+        $posse_assignments = Assignment::find($id);
+        return view('admin.posseAssignmentEdit', compact('posse_assignments'));
+    }
+
+    public function posse_assignments_update(AssignmentRequest $request)
+    {
+        $assignment = Assignment::find($request->id);
+        $assignment->detail = $request->detail;
+        $assignment->save();
+        return redirect(route('posse_assignments_create', ['id' => $request->week]));
+    }
+
+    public function posse_assignments_destroy(Request $request, $id)
+    {
+        Assignment::find($id)->delete();
+        return redirect(route('posse_assignments_create', ['id' => $request->week_id]));
     }
 }

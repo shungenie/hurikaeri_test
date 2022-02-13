@@ -45,3 +45,11 @@ Route::get('/admin/reflection/teaching_material/edit/{id}', 'AdminController@tea
 Route::post('/admin/reflection/teaching_material/edit/{id}', 'AdminController@teaching_material_update')->middleware('auth')->middleware('is_admin_role')->name('teaching_material_update');
 
 Route::post('/admin/reflection/teaching_material/destroy/{id}', 'AdminController@teaching_material_destroy')->middleware('auth')->middleware('is_admin_role')->name('teaching_material_destroy');
+
+Route::get('/admin/reflection/posse_assignments/create/{id}', 'AdminController@posse_assignments_create')->middleware('auth')->middleware('is_admin_role')->name('posse_assignments_create');
+Route::post('/admin/reflection/posse_assignments/create/{id}', 'AdminController@posse_assignments_store')->middleware('auth')->middleware('is_admin_role')->name('posse_assignments_store');
+
+Route::get('/admin/reflection/posse_assignments/edit/{id}', 'AdminController@posse_assignments_edit')->middleware('auth')->middleware('is_admin_role')->name('posse_assignments_edit');
+Route::post('/admin/reflection/posse_assignments/edit/{id}', 'AdminController@posse_assignments_update')->middleware('auth')->middleware('is_admin_role')->name('posse_assignments_update');
+
+Route::post('/admin/reflection/posse_assignments/destroy/{id}', 'AdminController@posse_assignments_destroy')->middleware('auth')->middleware('is_admin_role')->name('posse_assignments_destroy');
