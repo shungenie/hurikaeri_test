@@ -99,6 +99,11 @@ $(function () {
                 let assignment_time = parseInt($('#assignment_time_week' + week_id).val());
                 let review_time = parseInt($('#review_time_week' + week_id).val());
                 total_study_time.text(assignment_time + review_time);
+
+                let total_study_time_wrap = document.getElementById(
+                    'total_study_time_week' + week_id + '_wrap'
+                );
+                total_study_time_wrap.classList.remove('bg-danger');
             })
             // Ajaxリクエストが失敗した場合
             .fail(function (data, xhr, err) {

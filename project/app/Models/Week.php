@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Reflection;
 use App\Models\StudyTime;
 use App\Models\StartDateOfWeek;
+use Carbon\Carbon;
 
 class Week extends Model
 {
@@ -71,6 +72,24 @@ class Week extends Model
             return $assignment_time->study_time;
         }
         return 0;
+    }
+
+    public function was_not_inputted_study_time($user_id, $week_id)
+    {
+        $week = StartDateOfWeek::where('week_id', $week_id)->first();
+        if ($week) {
+            $dt = new Carbon;
+            if ($week->start_date > $dt) {
+                return false;
+            }
+            $review_time = StudyTime::where('user_id', $user_id)->where('week_id', $week_id)->where('study_time_type_id', 1)->first();
+            $assignment_time = StudyTime::where('user_id', $user_id)->where('week_id', $week_id)->where('study_time_type_id', 2)->first();
+            if ($review_time || $assignment_time) {
+                return false;
+            }
+            return true;
+        }
+        return false;
     }
 
     public function start_date_of_week($week_id, $generation_id)

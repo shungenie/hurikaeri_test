@@ -68,6 +68,10 @@ class GeneralMemberController extends Controller
         $week_id = $request->week_id;
         $study_time_type_id = $request->study_time_type;
         $study_time = StudyTime::firstOrNew(['user_id' => $user_id, 'week_id' => $week_id, 'study_time_type_id' => $study_time_type_id]);
+        if ($request->study_time == 0) {
+            $study_time->delete();
+            return redirect('/reflection');
+        }
         $study_time->user_id = $user_id;
         $study_time->week_id = $week_id;
         $study_time->study_time_type_id = $study_time_type_id;

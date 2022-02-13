@@ -88,7 +88,7 @@
                     <div class="border">{{ $week->start_date_of_week($week->id, $user->generation_id) }}~
                     </div>
                     <div class="study_time">
-                        <div class="border">
+                        <div class="border @if ($week->was_not_inputted_study_time($user->id, $week->id)) bg-danger @endif">
                             <span
                                 id="total_study_time_week{{ $week->id }}">{{ $week->total_study_time($user->id, $week->id) }}</span>時間
                         </div>
