@@ -19,5 +19,6 @@ class DatabaseSeeder extends Seeder
         $this->call(StudyTimeTypesTableSeeder::class);
         $this->call(GenerationsTableSeeder::class);
         $this->call(StartDateOfWeeksTableSeeder::class);
+        $this->call(CoursesTableSeeder::class);
     }
 }

@@ -41,7 +41,7 @@ $(function () {
 
     reflection.on('change', function () {
         var $this = $(this);
-        let week = $this.data('week');
+        let week_id = $this.data('week_id');
         let reflection_step = $this.data('reflection_step');
         let reflection_type = $this.data('reflection_type');
         let detail = $this.val();
@@ -52,7 +52,7 @@ $(function () {
             url: '/reflection/reflection_post', //routeの記述
             type: 'POST', //受け取り方法の記述（GETもある）
             data: {
-                week: week,
+                week_id: week_id,
                 reflection_step: reflection_step,
                 reflection_type: reflection_type,
                 detail: detail,
@@ -77,7 +77,7 @@ $(function () {
 
     study_time.on('change', function () {
         var $this = $(this);
-        let week = $this.data('week');
+        let week_id = $this.data('week_id');
         let study_time_type = $this.data('study_time_type');
         let study_time = $this.val();
         $.ajax({
@@ -87,7 +87,7 @@ $(function () {
             url: '/reflection/study_time', //routeの記述
             type: 'POST', //受け取り方法の記述（GETもある）
             data: {
-                week: week,
+                week_id: week_id,
                 study_time_type: study_time_type,
                 study_time: study_time,
             },
@@ -95,9 +95,9 @@ $(function () {
 
             // Ajaxリクエストが成功した場合
             .done(function () {
-                let total_study_time = $('#total_study_time_week' + week);
-                let assignment_time = parseInt($('#assignment_time_week' + week).val());
-                let review_time = parseInt($('#review_time_week' + week).val());
+                let total_study_time = $('#total_study_time_week' + week_id);
+                let assignment_time = parseInt($('#assignment_time_week' + week_id).val());
+                let review_time = parseInt($('#review_time_week' + week_id).val());
                 total_study_time.text(assignment_time + review_time);
             })
             // Ajaxリクエストが失敗した場合

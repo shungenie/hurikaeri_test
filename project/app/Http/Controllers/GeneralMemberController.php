@@ -8,6 +8,7 @@ use App\Models\ProgressOfAssignment;
 use App\Models\Reflection;
 use App\Models\Week;
 use App\Models\StudyTime;
+use App\Models\Course;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -18,12 +19,17 @@ class GeneralMemberController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $user = Auth::user();
-        $weeks = Week::where('phase_number', $user->phase_number)->get();
+        if ($request->course_id) {
+            $weeks = Week::where('course_id', $request->course_id)->orderBy('week_number')->get();
+        } else {
+            $weeks = Week::where('course_id', $user->course_id)->orderBy('week_number')->get();
+        }
         $teaching_materials = Assignment::where('assignment_type_id', 1)->get();
-        return view('generalUser.index', compact('user', 'weeks', 'teaching_materials'));
+        $courses = Course::all();
+        return view('generalUser.index', compact('user', 'weeks', 'teaching_materials', 'courses'));
     }
 
     public function assignment_check(Request $request)
@@ -42,13 +48,13 @@ class GeneralMemberController extends Controller
     public function reflection_post(Request $request)
     {
         $user_id = Auth::user()->id;
-        $week = $request->week;
+        $week_id = $request->week_id;
         $reflection_step = $request->reflection_step;
         $reflection_type_id = $request->reflection_type;
         $detail = $request->detail;
-        $reflection = Reflection::firstOrNew(['user_id' => $user_id, 'week' => $week, 'reflection_type_id' => $reflection_type_id, 'reflection_step' => $reflection_step]);
+        $reflection = Reflection::firstOrNew(['user_id' => $user_id, 'week_id' => $week_id, 'reflection_type_id' => $reflection_type_id, 'reflection_step' => $reflection_step]);
         $reflection->user_id = $user_id;
-        $reflection->week = $week;
+        $reflection->week_id = $week_id;
         $reflection->reflection_step = $reflection_step;
         $reflection->reflection_type_id = $reflection_type_id;
         $reflection->detail = $detail;
@@ -59,11 +65,11 @@ class GeneralMemberController extends Controller
     public function study_time(Request $request)
     {
         $user_id = Auth::user()->id;
-        $week = $request->week;
+        $week_id = $request->week_id;
         $study_time_type_id = $request->study_time_type;
-        $study_time = StudyTime::firstOrNew(['user_id' => $user_id, 'week' => $week, 'study_time_type_id' => $study_time_type_id]);
+        $study_time = StudyTime::firstOrNew(['user_id' => $user_id, 'week_id' => $week_id, 'study_time_type_id' => $study_time_type_id]);
         $study_time->user_id = $user_id;
-        $study_time->week = $week;
+        $study_time->week_id = $week_id;
         $study_time->study_time_type_id = $study_time_type_id;
         $study_time->study_time = $request->study_time;
         $study_time->save();
@@ -97,12 +103,17 @@ class GeneralMemberController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function reflection_show($id)
+    public function reflection_show($id, Request $request)
     {
         $user = User::find($id);
-        $weeks = Week::where('phase_number', $user->phase_number)->get();
+        if ($request->course_id) {
+            $weeks = Week::where('course_id', $request->course_id)->orderBy('week_number')->get();
+        } else {
+            $weeks = Week::where('course_id', $user->course_id)->orderBy('week_number')->get();
+        }
         $teaching_materials = Assignment::where('assignment_type_id', 1)->get();
-        return view('generalUser.reflectionShow', compact('user', 'weeks', 'teaching_materials'));
+        $courses = Course::all();
+        return view('generalUser.reflectionShow', compact('user', 'weeks', 'teaching_materials', 'courses'));
     }
 
     /**

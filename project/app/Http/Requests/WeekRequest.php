@@ -25,8 +25,8 @@ class WeekRequest extends FormRequest
     public function rules()
     {
         return [
-            'week_number' => [Rule::unique('weeks')->ignore($this->id), 'required', 'numeric'],
-            'phase_number' => 'required | numeric'
+            'week_number' => ['required', 'numeric'],
+            'course_id' => 'required | numeric'
         ];
     }
 }

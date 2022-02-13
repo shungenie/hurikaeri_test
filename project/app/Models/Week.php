@@ -13,36 +13,36 @@ class Week extends Model
 
     public function teaching_materials()
     {
-        return $this->hasMany('App\Models\Assignment', 'week', 'week_number')->where('assignment_type_id', 1);
+        return $this->hasMany('App\Models\Assignment')->where('assignment_type_id', 1);
     }
 
     public function posse_assignments()
     {
-        return $this->hasMany('App\Models\Assignment', 'week', 'week_number')->where('assignment_type_id', 2);
+        return $this->hasMany('App\Models\Assignment')->where('assignment_type_id', 2);
     }
 
-    public function personality_reflection($user_id, $week_number, $reflection_step)
+    public function personality_reflection($user_id, $week_id, $reflection_step)
     {
-        $personality_reflection = Reflection::where('user_id', $user_id)->where('week', $week_number)->where('reflection_step', $reflection_step)->where('reflection_type_id', 1)->first();
+        $personality_reflection = Reflection::where('user_id', $user_id)->where('week_id', $week_id)->where('reflection_step', $reflection_step)->where('reflection_type_id', 1)->first();
         if ($personality_reflection) {
             return $personality_reflection->detail;
         }
         return '';
     }
 
-    public function learning_reflection($user_id, $week_number, $reflection_step)
+    public function learning_reflection($user_id, $week_id, $reflection_step)
     {
-        $learning_reflection = Reflection::where('user_id', $user_id)->where('week', $week_number)->where('reflection_step', $reflection_step)->where('reflection_type_id', 2)->first();
+        $learning_reflection = Reflection::where('user_id', $user_id)->where('week_id', $week_id)->where('reflection_step', $reflection_step)->where('reflection_type_id', 2)->first();
         if ($learning_reflection) {
             return $learning_reflection->detail;
         }
         return '';
     }
 
-    public function total_study_time($user_id, $week_number)
+    public function total_study_time($user_id, $week_id)
     {
-        $review_time = StudyTime::where('user_id', $user_id)->where('week', $week_number)->where('study_time_type_id', 1)->first();
-        $assignment_time = StudyTime::where('user_id', $user_id)->where('week', $week_number)->where('study_time_type_id', 2)->first();
+        $review_time = StudyTime::where('user_id', $user_id)->where('week_id', $week_id)->where('study_time_type_id', 1)->first();
+        $assignment_time = StudyTime::where('user_id', $user_id)->where('week_id', $week_id)->where('study_time_type_id', 2)->first();
         if ($review_time && $assignment_time) {
             return $review_time->study_time + $assignment_time->study_time;
         }
@@ -55,18 +55,18 @@ class Week extends Model
         return 0;
     }
 
-    public function review_time($user_id, $week_number)
+    public function review_time($user_id, $week_id)
     {
-        $review_time = StudyTime::where('user_id', $user_id)->where('week', $week_number)->where('study_time_type_id', 1)->first();
+        $review_time = StudyTime::where('user_id', $user_id)->where('week_id', $week_id)->where('study_time_type_id', 1)->first();
         if ($review_time) {
             return $review_time->study_time;
         }
         return 0;
     }
 
-    public function assignment_time($user_id, $week_number)
+    public function assignment_time($user_id, $week_id)
     {
-        $assignment_time = StudyTime::where('user_id', $user_id)->where('week', $week_number)->where('study_time_type_id', 2)->first();
+        $assignment_time = StudyTime::where('user_id', $user_id)->where('week_id', $week_id)->where('study_time_type_id', 2)->first();
         if ($assignment_time) {
             return $assignment_time->study_time;
         }
@@ -85,5 +85,10 @@ class Week extends Model
     public function start_date_of_weeks()
     {
         return $this->hasMany('App\Models\StartDateOfWeek');
+    }
+
+    public function course()
+    {
+        return $this->belongsTo('App\Models\Course');
     }
 }

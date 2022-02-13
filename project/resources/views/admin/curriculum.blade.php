@@ -34,18 +34,18 @@
                         <div class="card-body">
                             <h5 class="card-title">{{ $week->week_number }}週目</h5>
                             <p class="card-text">
-                                <span>フェーズ:</span>
-                                <span>{{ $week->phase_number }}</span>
+                                <span>コース名:</span>
+                                <span>{{ $week->course->name }}</span>
                             </p>
                             <div class="mb-2">
                                 <a href="{{ route('week_edit', ['id' => $week->id]) }}"
-                                    class="btn btn-primary">フェーズ編集画面へ</a>
+                                    class="btn btn-primary mb-2 mb-lg-0">フェーズ編集画面へ</a>
                                 <a href="{{ route('week_start_edit', ['id' => $week->id]) }}"
                                     class="btn btn-primary">スタート日時編集画面へ</a>
                             </div>
                             <div>
                                 <a href="{{ route('teaching_material_create', ['id' => $week->id]) }}"
-                                    class="btn btn-primary">オンライン教材編集画面へ</a>
+                                    class="btn btn-primary mb-2 mb-lg-0">オンライン教材編集画面へ</a>
                                 <a href="{{ route('posse_assignments_create', ['id' => $week->id]) }}"
                                     class="btn btn-primary">POSSE課題編集画面へ</a>
                             </div>
