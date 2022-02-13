@@ -40,4 +40,8 @@ Route::post('/admin/reflection/week_start/edit/{id}', 'AdminController@week_star
 
 Route::get('/admin/reflection/teaching_material/create/{id}', 'AdminController@teaching_material_create')->middleware('auth')->middleware('is_admin_role')->name('teaching_material_create');
 Route::post('/admin/reflection/teaching_material/create/{id}', 'AdminController@teaching_material_store')->middleware('auth')->middleware('is_admin_role')->name('teaching_material_store');
+
+Route::get('/admin/reflection/teaching_material/edit/{id}', 'AdminController@teaching_material_edit')->middleware('auth')->middleware('is_admin_role')->name('teaching_material_edit');
+Route::post('/admin/reflection/teaching_material/edit/{id}', 'AdminController@teaching_material_update')->middleware('auth')->middleware('is_admin_role')->name('teaching_material_update');
+
 Route::post('/admin/reflection/teaching_material/destroy/{id}', 'AdminController@teaching_material_destroy')->middleware('auth')->middleware('is_admin_role')->name('teaching_material_destroy');

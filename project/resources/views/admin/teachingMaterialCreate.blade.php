@@ -25,7 +25,7 @@
 
     @endcomponent
     <div class="p-5">
-        <p class="h1 mb-3">Week {{ $week->week_number }}</p>
+        <p class="h1 mb-3">Week {{ $week->week_number }} オンライン教材</p>
         <p class="h3">現在設定されている課題</p>
         <div class="mb-3">
             @foreach ($week->teaching_materials as $teaching_material)
@@ -46,8 +46,8 @@
                                 <input type="hidden" name="week_id" value="{{ $week->id }}">
                                 <button type="submit" class="btn btn-danger">削除</button>
                             </form>
-                            {{-- <a href="{{ route('teaching_material_create', ['id' => $week->id]) }}"
-                                class="btn btn-primary">編集</a> --}}
+                            <a href="{{ route('teaching_material_edit', ['id' => $teaching_material->id]) }}"
+                                class="btn btn-primary">編集</a>
                         </div>
                     </div>
                 </div>

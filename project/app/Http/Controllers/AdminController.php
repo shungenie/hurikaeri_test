@@ -114,6 +114,20 @@ class AdminController extends Controller
         return redirect(route('week_start_edit', ['id' => $request->id]));
     }
 
+    public function teaching_material_edit($id)
+    {
+        $teaching_material = Assignment::find($id);
+        return view('admin.teachingMaterialEdit', compact('teaching_material'));
+    }
+
+    public function teaching_material_update(AssignmentRequest $request)
+    {
+        $assignment = Assignment::find($request->id);
+        $assignment->detail = $request->detail;
+        $assignment->save();
+        return redirect(route('teaching_material_create', ['id' => $request->week]));
+    }
+
     public function teaching_material_destroy(Request $request, $id)
     {
         Assignment::find($id)->delete();
