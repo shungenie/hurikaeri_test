@@ -16,23 +16,23 @@ class WeeksTablesSeeder extends Seeder
         $params = [
             [
                 'week_number' => 1,
-                'phase_number' => 1
+                'course_id' => 1
             ],
             [
                 'week_number' => 2,
-                'phase_number' => 1
+                'course_id' => 1
             ],
             [
                 'week_number' => 3,
-                'phase_number' => 1
+                'course_id' => 1
             ],
             [
                 'week_number' => 4,
-                'phase_number' => 2
+                'course_id' => 2
             ],
             [
                 'week_number' => 5,
-                'phase_number' => 2
+                'course_id' => 2
             ],
         ];
         DB::table('weeks')->insert($params);

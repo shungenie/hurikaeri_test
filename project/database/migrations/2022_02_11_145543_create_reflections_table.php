@@ -15,7 +15,7 @@ class CreateReflectionsTable extends Migration
     {
         Schema::create('reflections', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('week');
+            $table->integer('week_id');
             $table->integer('user_id');
             $table->integer('reflection_step');
             $table->integer('reflection_type_id');

@@ -24,6 +24,7 @@ class UsersTableSeeder extends Seeder
                 'posse_branch' => 1,
                 'generation_id' => 1,
                 'phase_number' => 1,
+                'course_id' => 1,
             ],
             [
                 'name' => "DaikinTV",
@@ -34,6 +35,7 @@ class UsersTableSeeder extends Seeder
                 'posse_branch' => 1,
                 'generation_id' => 1,
                 'phase_number' => 1,
+                'course_id' => 1,
             ],
             [
                 'name' => "mrp=tmp",
@@ -44,6 +46,7 @@ class UsersTableSeeder extends Seeder
                 'posse_branch' => 2,
                 'generation_id' => 2,
                 'phase_number' => 2,
+                'course_id' => 1,
             ],
             [
                 'name' => "たろう",
@@ -54,6 +57,7 @@ class UsersTableSeeder extends Seeder
                 'posse_branch' => 2,
                 'generation_id' => 3,
                 'phase_number' => 2,
+                'course_id' => 1,
             ],
         ]);
     }

@@ -16,7 +16,7 @@ class CreateStudyTimesTable extends Migration
         Schema::create('study_times', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('user_id');
-            $table->integer('week');
+            $table->integer('week_id');
             $table->integer('study_time_type_id');
             $table->integer('study_time');
             $table->timestamps();

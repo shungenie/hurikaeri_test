@@ -25,6 +25,7 @@ class CreateUsersTable extends Migration
             $table->integer('posse_branch');
             $table->integer('generation_id');
             $table->integer('phase_number');
+            $table->integer('course_id');
             $table->rememberToken();
             $table->timestamps();
         });
