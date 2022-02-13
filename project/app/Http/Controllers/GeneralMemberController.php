@@ -8,6 +8,7 @@ use App\Models\ProgressOfAssignment;
 use App\Models\Reflection;
 use App\Models\Week;
 use App\Models\StudyTime;
+use App\Models\Course;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -18,12 +19,17 @@ class GeneralMemberController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $user = Auth::user();
-        $weeks = Week::where('course_id', $user->course_id)->orderBy('week_number')->get();
+        if ($request->course_id) {
+            $weeks = Week::where('course_id', $request->course_id)->orderBy('week_number')->get();
+        } else {
+            $weeks = Week::where('course_id', $user->course_id)->orderBy('week_number')->get();
+        }
         $teaching_materials = Assignment::where('assignment_type_id', 1)->get();
-        return view('generalUser.index', compact('user', 'weeks', 'teaching_materials'));
+        $courses = Course::all();
+        return view('generalUser.index', compact('user', 'weeks', 'teaching_materials', 'courses'));
     }
 
     public function assignment_check(Request $request)
@@ -97,12 +103,17 @@ class GeneralMemberController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function reflection_show($id)
+    public function reflection_show($id, Request $request)
     {
         $user = User::find($id);
-        $weeks = Week::where('course_id', $user->course_id)->orderBy('week_number')->get();
+        if ($request->course_id) {
+            $weeks = Week::where('course_id', $request->course_id)->orderBy('week_number')->get();
+        } else {
+            $weeks = Week::where('course_id', $user->course_id)->orderBy('week_number')->get();
+        }
         $teaching_materials = Assignment::where('assignment_type_id', 1)->get();
-        return view('generalUser.reflectionShow', compact('user', 'weeks', 'teaching_materials'));
+        $courses = Course::all();
+        return view('generalUser.reflectionShow', compact('user', 'weeks', 'teaching_materials', 'courses'));
     }
 
     /**

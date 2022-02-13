@@ -26,6 +26,17 @@
 
         @endcomponent
     </div>
+    <div class="ml-3 mb-3">
+        <p>表示するコース</p>
+        <form action="" method="get">
+            <select name="course_id" id="" class="form-control w-25 mb-2 d-inline">
+                @foreach ($courses as $course)
+                    <option value="{{ $course->id }}">{{ $course->name }}</option>
+                @endforeach
+            </select>
+            <button class="btn btn-primary" type="submit">選択</button>
+        </form>
+    </div>
     <div>
         <div class="reflection_sheet border">
             <div class="border" style="width:300px; flex-shrink: 0;">
