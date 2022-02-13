@@ -29,21 +29,35 @@
         <p class="h3">現在設定されている課題</p>
         <div class="mb-3">
             @foreach ($week->teaching_materials as $teaching_material)
-                <p>
-                    <span>
-                        {{ $loop->iteration }}.
-                    </span>
-                    <span>
-                        {{ $teaching_material->detail }}
-                    </span>
-                </p>
+                <div class="card">
+                    <div class="card-body">
+                        <p class="d-inline">
+                            <span>
+                                {{ $loop->iteration }}.
+                            </span>
+                            <span>
+                                {{ $teaching_material->detail }}
+                            </span>
+                        </p>
+                        <div class="float-right">
+                            <form action="{{ route('teaching_material_destroy', ['id' => $teaching_material->id]) }}"
+                                method="post" class="mb-3">
+                                @csrf
+                                <input type="hidden" name="week_id" value="{{ $week->id }}">
+                                <button type="submit" class="btn btn-danger">削除</button>
+                            </form>
+                            {{-- <a href="{{ route('teaching_material_create', ['id' => $week->id]) }}"
+                                class="btn btn-primary">編集</a> --}}
+                        </div>
+                    </div>
+                </div>
             @endforeach
             @if (count($week->teaching_materials) == 0)
                 まだ設定されていません
             @endif
         </div>
         <p class="h3">課題を作成する</p>
-        <form action="" method="post">
+        <form action="" method="post" class="w-100">
             @csrf
             <input type="hidden" name="week_id" value="{{ $week->id }}">
             <input type="hidden" name="week" value="{{ $week->week_number }}">
@@ -55,7 +69,11 @@
                     <p class="invalid-feedback">{{ $message }}</p>
                 @enderror
             </div>
-            <button type="submit" class="btn btn-primary btn-sm">送信</button>
+            <button type="submit" class="btn btn-primary btn-sm w-100">
+                <p class="h5 mb-0 p-1">
+                    送信
+                </p>
+            </button>
         </form>
     </div>
 </body>
