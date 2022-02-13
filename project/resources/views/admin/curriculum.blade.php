@@ -26,19 +26,28 @@
     @component('components.curriculumHeader')
 
     @endcomponent
-    @foreach ($weeks as $week)
-        <div class="card w-100 mb-3">
-            <div class="card-body">
-                <h5 class="card-title">{{ $week->week_number }}週目</h5>
-                <p class="card-text">
-                    <span>フェーズ:</span>
-                    <span>{{ $week->phase_number }}</span>
-                </p>
-                <a href="#" class="btn btn-primary">フェーズ編集画面へ</a>
-                <a href="#" class="btn btn-primary">スタート日時編集画面へ</a>
+    <div class="container p-5">
+        <div class="row">
+            <div class="col-7">
+                @foreach ($weeks as $week)
+                    <div class="card w-100 mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ $week->week_number }}週目</h5>
+                            <p class="card-text">
+                                <span>フェーズ:</span>
+                                <span>{{ $week->phase_number }}</span>
+                            </p>
+                            <a href="{{ route('week_edit', ['id' => $week->id]) }}"
+                                class="btn btn-primary">フェーズ編集画面へ</a>
+                            <a href="{{ route('week_start_edit', ['id' => $week->id]) }}"
+                                class="btn btn-primary">スタート日時編集画面へ</a>
+                        </div>
+                    </div>
+                @endforeach
             </div>
+
         </div>
-    @endforeach
+    </div>
 </body>
 
 </html>

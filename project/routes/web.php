@@ -29,5 +29,11 @@ Route::get('/admin/reflection', 'AdminController@index')->middleware('auth')->mi
 
 Route::get('/admin/reflection/curriculum', 'AdminController@curriculum')->middleware('auth')->middleware('is_admin_role')->name('curriculum');
 
-Route::get('/admin/reflection/week_create', 'AdminController@week_create')->middleware('auth')->middleware('is_admin_role')->name('week_create');
-Route::post('/admin/reflection/week_create', 'AdminController@week_store')->middleware('auth')->middleware('is_admin_role')->name('week_store');
+Route::get('/admin/reflection/week/create', 'AdminController@week_create')->middleware('auth')->middleware('is_admin_role')->name('week_create');
+Route::post('/admin/reflection/week/create', 'AdminController@week_store')->middleware('auth')->middleware('is_admin_role')->name('week_store');
+
+Route::get('/admin/reflection/week/edit/{id}', 'AdminController@week_edit')->middleware('auth')->middleware('is_admin_role')->name('week_edit');
+Route::post('/admin/reflection/week/edit/{id}', 'AdminController@week_update')->middleware('auth')->middleware('is_admin_role')->name('week_update');
+
+Route::get('/admin/reflection/week_start/edit/{id}', 'AdminController@week_start_edit')->middleware('auth')->middleware('is_admin_role')->name('week_start_edit');
+Route::post('/admin/reflection/week_start/edit/{id}', 'AdminController@week_start_update')->middleware('auth')->middleware('is_admin_role')->name('week_start_update');

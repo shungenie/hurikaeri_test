@@ -81,4 +81,9 @@ class Week extends Model
         }
         return 'まだ設定されていません';
     }
+
+    public function start_date_of_weeks()
+    {
+        return $this->hasMany('App\Models\StartDateOfWeek');
+    }
 }

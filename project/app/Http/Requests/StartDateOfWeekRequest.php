@@ -3,9 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
-class WeekRequest extends FormRequest
+class StartDateOfWeekRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,8 +24,9 @@ class WeekRequest extends FormRequest
     public function rules()
     {
         return [
-            'week_number' => [Rule::unique('weeks')->ignore($this->id), 'required', 'numeric'],
-            'phase_number' => 'required | numeric'
+            'week_id' => 'required',
+            'generation_id' => 'required',
+            'start_date' => 'required',
         ];
     }
 }
