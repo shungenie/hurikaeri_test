@@ -23,7 +23,7 @@
 </head>
 
 <body>
-    @component('components.header', ['user' => $user])
+    @component('components.adminHeader')
 
     @endcomponent
     <div class="p-5">
