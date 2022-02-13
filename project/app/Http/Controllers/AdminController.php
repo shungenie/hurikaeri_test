@@ -11,6 +11,7 @@ use App\Models\Week;
 use App\Models\Generation;
 use App\Models\StartDateOfWeek;
 use App\Models\Assignment;
+use App\Models\Course;
 use Illuminate\Support\Facades\Auth;
 
 use App\Consts\ReflectionConsts;
@@ -32,7 +33,7 @@ class AdminController extends Controller
     public function curriculum()
     {
         $user = Auth::user();
-        $weeks = Week::all();
+        $weeks = Week::orderBy('week_number')->get();
         $generations = Generation::where('is_graduated', false)->get();
         return view('admin.curriculum', compact('user', 'weeks', 'generations'));
     }
@@ -43,14 +44,15 @@ class AdminController extends Controller
      */
     public function week_create()
     {
-        return view('admin.weekCreate');
+        $courses = Course::all();
+        return view('admin.weekCreate', compact('courses'));
     }
 
     public function week_store(WeekRequest $request)
     {
         $week = new Week;
         $week->week_number = $request->week_number;
-        $week->phase_number = $request->phase_number;
+        $week->course_id = $request->course_id;
         $week->save();
         return redirect(route('curriculum'));
     }
@@ -101,14 +103,15 @@ class AdminController extends Controller
     public function week_edit($id)
     {
         $week = Week::find($id);
-        return view('admin.weekEdit', compact('week'));
+        $courses = Course::all();
+        return view('admin.weekEdit', compact('week', 'courses'));
     }
 
     public function week_update(WeekRequest $request)
     {
         $week = Week::find($request->id);
         $week->week_number = $request->week_number;
-        $week->phase_number = $request->phase_number;
+        $week->course_id = $request->course_id;
         $week->save();
         return redirect(route('curriculum'));
     }

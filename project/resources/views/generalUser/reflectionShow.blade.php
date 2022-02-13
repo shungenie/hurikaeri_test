@@ -79,14 +79,14 @@
                     <div class="study_time">
                         <div class="border">
                             <span
-                                id="total_study_time_week{{ $week->week_number }}">{{ $week->total_study_time($user->id, $week->week_number) }}</span>時間
+                                id="total_study_time_week{{ $week->id }}">{{ $week->total_study_time($user->id, $week->id) }}</span>時間
                         </div>
                         <div class="d-flex w-100">
                             <div class="border w-100 review_time">
-                                {{ $week->review_time($user->id, $week->week_number) }}時間
+                                {{ $week->review_time($user->id, $week->id) }}時間
                             </div>
                             <div class="border w-100 assignment_time">
-                                {{ $week->assignment_time($user->id, $week->week_number) }}時間
+                                {{ $week->assignment_time($user->id, $week->id) }}時間
                             </div>
                         </div>
                     </div>
@@ -117,7 +117,7 @@
                     @for ($i = 1; $i <= 7; $i++)
                         <div class="personality_reflection_step d-flex border">
                             <div class="border">{{ $i }}</div>
-                            <div>{{ $week->personality_reflection($user->id, $week->week_number, $i) }}</div>
+                            <div>{{ $week->personality_reflection($user->id, $week->id, $i) }}</div>
                         </div>
                     @endfor
                     <div class="border">7つの振り返り(学習)</div>
@@ -125,7 +125,7 @@
                         <div class="learning_reflection_step d-flex border">
                             <div class="border">{{ $i }}</div>
                             <div>
-                                {{ $week->learning_reflection($user->id, $week->week_number, $i) }}</div>
+                                {{ $week->learning_reflection($user->id, $week->id, $i) }}</div>
                         </div>
                     @endfor
                 </div>

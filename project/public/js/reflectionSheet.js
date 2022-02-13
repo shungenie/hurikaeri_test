@@ -41,7 +41,7 @@ $(function () {
   var reflection = $('.reflection');
   reflection.on('change', function () {
     var $this = $(this);
-    var week = $this.data('week');
+    var week_id = $this.data('week_id');
     var reflection_step = $this.data('reflection_step');
     var reflection_type = $this.data('reflection_type');
     var detail = $this.val();
@@ -54,7 +54,7 @@ $(function () {
       type: 'POST',
       //受け取り方法の記述（GETもある）
       data: {
-        week: week,
+        week_id: week_id,
         reflection_step: reflection_step,
         reflection_type: reflection_type,
         detail: detail
@@ -74,7 +74,7 @@ $(function () {
   var study_time = $('.study_time_input');
   study_time.on('change', function () {
     var $this = $(this);
-    var week = $this.data('week');
+    var week_id = $this.data('week_id');
     var study_time_type = $this.data('study_time_type');
     var study_time = $this.val();
     $.ajax({
@@ -86,15 +86,15 @@ $(function () {
       type: 'POST',
       //受け取り方法の記述（GETもある）
       data: {
-        week: week,
+        week_id: week_id,
         study_time_type: study_time_type,
         study_time: study_time
       }
     }) // Ajaxリクエストが成功した場合
     .done(function () {
-      var total_study_time = $('#total_study_time_week' + week);
-      var assignment_time = parseInt($('#assignment_time_week' + week).val());
-      var review_time = parseInt($('#review_time_week' + week).val());
+      var total_study_time = $('#total_study_time_week' + week_id);
+      var assignment_time = parseInt($('#assignment_time_week' + week_id).val());
+      var review_time = parseInt($('#review_time_week' + week_id).val());
       total_study_time.text(assignment_time + review_time);
     }) // Ajaxリクエストが失敗した場合
     .fail(function (data, xhr, err) {

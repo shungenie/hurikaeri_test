@@ -39,12 +39,13 @@
                 @enderror
             </div>
             <div class="form-group">
-                <label for="exampleFormControlInput2">フェーズ</label>
-                <input type="number" class="form-control @error('phase_number') is-invalid @enderror"
-                    id="exampleFormControlInput2" name="phase_number" value="{{ $week->phase_number }}">
-                @error('phase_number')
-                    <p class="invalid-feedback">{{ $message }}</p>
-                @enderror
+                <label for="exampleFormControlSelect1">コース</label>
+                <select class="form-control @error('course_id') is-invalid @enderror" id="exampleFormControlSelect1"
+                    name="course_id">
+                    @foreach ($courses as $course)
+                        <option value="{{ $course->id }}" @if ($course->id == $week->course_id) selected @endif>{{ $course->name }}</option>
+                    @endforeach
+                </select>
             </div>
             <button type="submit" class="btn btn-primary btn-sm">送信</button>
         </form>

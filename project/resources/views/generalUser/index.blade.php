@@ -79,19 +79,18 @@
                     <div class="study_time">
                         <div class="border">
                             <span
-                                id="total_study_time_week{{ $week->week_number }}">{{ $week->total_study_time($user->id, $week->week_number) }}</span>時間
+                                id="total_study_time_week{{ $week->id }}">{{ $week->total_study_time($user->id, $week->id) }}</span>時間
                         </div>
                         <div class="d-flex w-100">
                             <div class="border w-100 review_time">
-                                <input type="number" value="{{ $week->review_time($user->id, $week->week_number) }}"
-                                    data-study_time_type=1 data-week="{{ $week->week_number }}"
-                                    class="study_time_input" id="review_time_week{{ $week->week_number }}">時間
+                                <input type="number" value="{{ $week->review_time($user->id, $week->id) }}"
+                                    data-study_time_type=1 data-week_id="{{ $week->id }}" class="study_time_input"
+                                    id="review_time_week{{ $week->id }}">時間
                             </div>
                             <div class="border w-100 assignment_time">
-                                <input type="number"
-                                    value="{{ $week->assignment_time($user->id, $week->week_number) }}"
-                                    data-study_time_type=2 data-week="{{ $week->week_number }}"
-                                    class="study_time_input" id="assignment_time_week{{ $week->week_number }}">時間
+                                <input type="number" value="{{ $week->assignment_time($user->id, $week->id) }}"
+                                    data-study_time_type=2 data-week_id="{{ $week->id }}" class="study_time_input"
+                                    id="assignment_time_week{{ $week->id }}">時間
                             </div>
                         </div>
                     </div>
@@ -122,9 +121,9 @@
                         <div class="personality_reflection_step d-flex border">
                             <div class="border">{{ $i }}</div>
                             <textarea type="text" class="d-block reflection border" rows="3"
-                                style="width:98%; resize:none;" data-week="{{ $week->week_number }}"
+                                style="width:98%; resize:none;" data-week_id="{{ $week->id }}"
                                 data-reflection_step={{ $i }}
-                                data-reflection_type=1>{{ $week->personality_reflection($user->id, $week->week_number, $i) }}</textarea>
+                                data-reflection_type=1>{{ $week->personality_reflection($user->id, $week->id, $i) }}</textarea>
                         </div>
                     @endfor
                     <div class="border">7つの振り返り(学習)</div>
@@ -132,9 +131,9 @@
                         <div class="learning_reflection_step d-flex border">
                             <div class="border">{{ $i }}</div>
                             <textarea type="text" class="d-block reflection border" rows="3"
-                                style="width:98%; resize:none;" data-week="{{ $week->week_number }}"
+                                style="width:98%; resize:none;" data-week_id="{{ $week->id }}"
                                 data-reflection_step={{ $i }}
-                                data-reflection_type=2>{{ $week->learning_reflection($user->id, $week->week_number, $i) }}</textarea>
+                                data-reflection_type=2>{{ $week->learning_reflection($user->id, $week->id, $i) }}</textarea>
                         </div>
                     @endfor
                 </div>
