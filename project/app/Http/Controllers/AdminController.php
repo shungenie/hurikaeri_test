@@ -29,7 +29,8 @@ class AdminController extends Controller
     {
         $user = Auth::user();
         $weeks = Week::all();
-        return view('admin.curriculum', compact('user', 'weeks'));
+        $generations = Generation::where('is_graduated', false)->get();
+        return view('admin.curriculum', compact('user', 'weeks', 'generations'));
     }
     /**
      * Show the form for creating a new resource.

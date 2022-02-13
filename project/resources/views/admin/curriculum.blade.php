@@ -37,15 +37,37 @@
                                 <span>フェーズ:</span>
                                 <span>{{ $week->phase_number }}</span>
                             </p>
-                            <a href="{{ route('week_edit', ['id' => $week->id]) }}"
-                                class="btn btn-primary">フェーズ編集画面へ</a>
-                            <a href="{{ route('week_start_edit', ['id' => $week->id]) }}"
-                                class="btn btn-primary">スタート日時編集画面へ</a>
+                            <div class="mb-2">
+                                <a href="{{ route('week_edit', ['id' => $week->id]) }}"
+                                    class="btn btn-primary">フェーズ編集画面へ</a>
+                                <a href="{{ route('week_start_edit', ['id' => $week->id]) }}"
+                                    class="btn btn-primary">スタート日時編集画面へ</a>
+                            </div>
+                            <div>
+                                <a href="{{ route('week_edit', ['id' => $week->id]) }}"
+                                    class="btn btn-primary">オンライン教材編集画面へ</a>
+                                <a href="{{ route('week_start_edit', ['id' => $week->id]) }}"
+                                    class="btn btn-primary">POSSE課題編集画面へ</a>
+                            </div>
                         </div>
                     </div>
                 @endforeach
             </div>
-
+            <div class="col-5">
+                <div class="card">
+                    <div class="card-header">
+                        現在のWeek
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        @foreach ($generations as $generation)
+                            <li class="list-group-item">
+                                <span>{{ $generation->generation }}期生:</span>
+                                <span>Week{{ $generation->current_week($generation->id) }}</span>
+                            </li>
+                        @endforeach
+                    </ul>
+                </div>
+            </div>
         </div>
     </div>
 </body>
