@@ -21,6 +21,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/reflection', 'GeneralMemberController@index')->middleware('auth')->name('general_index');
 
+Route::get('/reflection/{id}', 'GeneralMemberController@reflection_show')->middleware('auth')->name('reflection_show');
+
 Route::post('/reflection/check', 'GeneralMemberController@assignment_check')->middleware('auth')->name('reflection_check');
 Route::post('/reflection/reflection_post', 'GeneralMemberController@reflection_post')->middleware('auth')->name('reflection_post');
 Route::post('/reflection/study_time', 'GeneralMemberController@study_time')->middleware('auth')->name('study_time');

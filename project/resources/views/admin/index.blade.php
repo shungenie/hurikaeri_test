@@ -62,7 +62,8 @@
                             @endif
                         </span>
                     </p>
-                    <a href="#" class="btn btn-primary">振り返りシート</a>
+                    <a href="{{ route('reflection_show', ['id' => $posse_member->id]) }}"
+                        class="btn btn-primary">振り返りシート</a>
                     <a href="#" class="btn btn-primary">学習時間などの詳細</a>
                 </div>
             </div>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Assignment;
 use App\Models\ProgressOfAssignment;
 use App\Models\Reflection;
@@ -96,9 +97,12 @@ class GeneralMemberController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function reflection_show($id)
     {
-        //
+        $user = User::find($id);
+        $weeks = Week::where('phase_number', $user->phase_number)->get();
+        $teaching_materials = Assignment::where('assignment_type_id', 1)->get();
+        return view('generalUser.reflectionShow', compact('user', 'weeks', 'teaching_materials'));
     }
 
     /**
