@@ -24,7 +24,6 @@
 
 <body>
     @component('components.curriculumHeader')
-
     @endcomponent
     <div class="container p-5">
         <div class="row">
@@ -39,7 +38,7 @@
                             </p>
                             <div class="mb-2">
                                 <a href="{{ route('week_edit', ['id' => $week->id]) }}"
-                                    class="btn btn-primary mb-2 mb-lg-0">フェーズ編集画面へ</a>
+                                    class="btn btn-primary mb-2 mb-lg-0">コース編集画面へ</a>
                                 <a href="{{ route('week_start_edit', ['id' => $week->id]) }}"
                                     class="btn btn-primary">スタート日時編集画面へ</a>
                             </div>

@@ -22,18 +22,15 @@
 
 <body>
     @component('components.curriculumHeader')
-
     @endcomponent
     <div class="p-5">
         <form action="" method="post">
             @csrf
             <input type="hidden" name="id" value="{{ $week->id }}">
             <div class="form-group">
-                {{-- TODO:week numberの入れ替え機能を後に実装する。その際、下のスタイル属性を変更する --}}
-                <label for="exampleFormControlInput1">Week Number(現在編集できません)</label>
+                <label for="exampleFormControlInput1">Week Number</label>
                 <input type="number" class="form-control @error('week_number') is-invalid @enderror"
-                    id="exampleFormControlInput1" name="week_number" value="{{ $week->week_number }}"
-                    style="pointer-events: none;">
+                    id="exampleFormControlInput1" name="week_number" value="{{ $week->week_number }}">
                 @error('week_number')
                     <p class="invalid-feedback">{{ $message }}</p>
                 @enderror
@@ -43,7 +40,8 @@
                 <select class="form-control @error('course_id') is-invalid @enderror" id="exampleFormControlSelect1"
                     name="course_id">
                     @foreach ($courses as $course)
-                        <option value="{{ $course->id }}" @if ($course->id == $week->course_id) selected @endif>{{ $course->name }}</option>
+                        <option value="{{ $course->id }}" @if ($course->id == $week->course_id) selected @endif>
+                            {{ $course->name }}</option>
                     @endforeach
                 </select>
             </div>
