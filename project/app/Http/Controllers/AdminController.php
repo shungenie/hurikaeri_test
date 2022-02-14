@@ -66,7 +66,7 @@ class AdminController extends Controller
     public function teaching_material_store(AssignmentRequest $request)
     {
         $assignment = new Assignment;
-        $assignment->week = $request->week;
+        $assignment->week_id = $request->week_id;
         $assignment->detail = $request->detail;
         $assignment->assignment_type_id = ReflectionConsts::TEACHING_MATERIAL;
         $assignment->save();
@@ -82,7 +82,7 @@ class AdminController extends Controller
     public function posse_assignments_store(AssignmentRequest $request)
     {
         $assignment = new Assignment;
-        $assignment->week = $request->week;
+        $assignment->week_id = $request->week_id;
         $assignment->detail = $request->detail;
         $assignment->assignment_type_id = ReflectionConsts::POSSE_ASSIGNMENT;
         $assignment->save();
@@ -144,7 +144,7 @@ class AdminController extends Controller
         $assignment = Assignment::find($request->id);
         $assignment->detail = $request->detail;
         $assignment->save();
-        return redirect(route('teaching_material_create', ['id' => $request->week]));
+        return redirect(route('teaching_material_create', ['id' => $request->week_id]));
     }
 
     public function teaching_material_destroy(Request $request, $id)
@@ -164,7 +164,7 @@ class AdminController extends Controller
         $assignment = Assignment::find($request->id);
         $assignment->detail = $request->detail;
         $assignment->save();
-        return redirect(route('posse_assignments_create', ['id' => $request->week]));
+        return redirect(route('posse_assignments_create', ['id' => $request->week_id]));
     }
 
     public function posse_assignments_destroy(Request $request, $id)

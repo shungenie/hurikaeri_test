@@ -11,6 +11,6 @@ class StartDateOfWeek extends Model
 
     public function generation($generation_id)
     {
-        return Generation::find($generation_id)->generation;
+        return Generation::find($generation_id);
     }
 }

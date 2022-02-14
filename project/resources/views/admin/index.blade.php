@@ -30,7 +30,10 @@
         @foreach ($posse_members as $posse_member)
             <div class="card w-100 mb-3">
                 <div class="card-body">
-                    <h5 class="card-title">{{ $posse_member->name }}</h5>
+                    <h5 class="card-title">
+                        {{ $posse_member->name }}
+                        <span>{{ $posse_member->generation($posse_member->generation_id)->current_week($posse_member->generation_id) }}</span>
+                    </h5>
                     <p class="mb-0 card-text">
                         <span>メンバーID:</span>
                         <span>
@@ -43,7 +46,7 @@
                         <span>
                             {{ $posse_member->posse_branch }}
                         </span>
-                        <span> {{ $posse_member->generation($posse_member->generation_id) }}</span>
+                        <span> {{ $posse_member->generation($posse_member->generation_id)->generation }}</span>
                         <span>期生</span>
                     </p>
                     <p class="mb-0 card-text">

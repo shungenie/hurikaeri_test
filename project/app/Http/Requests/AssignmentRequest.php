@@ -24,7 +24,7 @@ class AssignmentRequest extends FormRequest
     public function rules()
     {
         return [
-            'week' => 'required',
+            'week_id' => 'required',
             'detail' => 'required',
         ];
     }

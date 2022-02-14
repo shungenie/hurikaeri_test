@@ -31,7 +31,7 @@
         <form action="" method="post" class="w-100">
             @csrf
             <input type="hidden" name="id" value="{{ $teaching_material->id }}">
-            <input type="hidden" name="week" value="{{ $teaching_material->week }}">
+            <input type="hidden" name="week_id" value="{{ $teaching_material->week_id }}">
             <div class="form-group">
                 <label for="exampleFormControlTextarea1">課題の内容</label>
                 <textarea class="form-control @error('detail') is-invalid @enderror" id="exampleFormControlTextarea1"

@@ -32,7 +32,7 @@
                 <div>
                     <p>
                         <span>
-                            {{ $start_date_of_week->generation($start_date_of_week->generation_id) }}期生開始日:
+                            {{ $start_date_of_week->generation($start_date_of_week->generation_id)->generation }}期生開始日:
                         </span>
                         <span>
                             {{ $start_date_of_week->start_date }}
